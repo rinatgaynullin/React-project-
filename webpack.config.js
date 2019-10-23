@@ -1,26 +1,23 @@
-const webpack = require('webpack');
+const webpack = require('webpack')
 const path = require('path')
 module.exports = {
-   entry: {
-       app: './index.jsx',
-   },
-   context: `${__dirname}/static_src`,
-   output: {
-       path: path.resolve(__dirname,'/static/build'),
-       filename: 'app.js',
-   },
+    entry: {
+        app: './index.jsx',
+    },
+    context: path.resolve(__dirname,"static_src"),
+    output: {
+        path: path.resolve(__dirname,"static/build"),
+        filename: 'app.js',
+    },
 
     module: {
-       rules: [
-           {
-               test: /\.(js|jsx)$/,
-               include: `${__dirname}/static_src`,
-               loader: 'babel-loader',
-               exclude: /node_modules/,
-               query: {
-                 presets: ['@babel/env', '@babel/react'],
-               }
-           },
-       ],
-   },
+        rules: [{
+            test: /\.(js|jsx)?$/,
+            include: path.resolve(__dirname, "static_src"),
+            exclude: path.resolve(__dirname,'node_modules'),
+            use: {
+                loader: 'babel-loader?cacheDirectory=true',
+            }
+        }]
+    },
 };
