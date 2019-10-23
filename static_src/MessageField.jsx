@@ -9,7 +9,7 @@ export default class MessageField extends React.Component {
       	this.state = {
         	messages: ["Привет!", "Как дела?"],
         	botAnswers: ['Чем могу помочь','Здравствуйте','Чего желаете','Как вы,'],
-        	autor: 'Ринат'
+        	author: 'Ринат'
       	}
       	this.handleClick = this.handleClick.bind(this)
   	}
@@ -22,7 +22,7 @@ export default class MessageField extends React.Component {
     	if (this.state.messages.length % 2 === 1) {  // Остаток от деления на 2
         	setTimeout(() =>
         		this.setState(
-            		{ 'messages': [...this.state.messages, `${this.randomChoise(this.state.botAnswers)} ${this.state.autor}?`] }),1000);
+            		{ 'messages': [...this.state.messages, `${this.randomChoise(this.state.botAnswers)} ${this.state.author}?`] }),1000);
     	}
 	}
 
@@ -35,11 +35,11 @@ export default class MessageField extends React.Component {
 
    	render() {
        	const messageElements = this.state.messages.map((text, index) => (
-        	<Message key={ index } text={ text } />));
+        	<Message key={ index } text={ text }  />));
 
        	return <div>
            	{ messageElements }
-            <span>{this.state.autor}</span>
+            <span>{this.state.author}</span>
            	<button onClick={ this.handleClick }>Отправить сообщение</button>
        	</div>
    	}
