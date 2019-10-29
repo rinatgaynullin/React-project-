@@ -20,7 +20,19 @@ module.exports = {
                 exclude: path.resolve(__dirname,'node_modules'),
                 use: {
                     loader: 'babel-loader?cacheDirectory=true',
-                }
+                    options: {
+                        presets: ['@babel/env', '@babel/react'],
+                        plugins: [
+                            [
+                                "@babel/plugin-proposal-class-properties",
+                                {
+                                    "loose": true
+                                }
+                            ]
+                        ]
+                    }
+                },
+                
             },
             {
                 test: /\.css$/,
@@ -29,4 +41,11 @@ module.exports = {
      
         ]
     },
+    devServer: {
+        port: 8080,
+        historyApiFallback: {
+            index: 'index.html'
+        }
+     },
+  
 };
