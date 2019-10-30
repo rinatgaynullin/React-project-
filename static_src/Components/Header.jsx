@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import AppBar from 'material-ui/AppBar';
 import { Link } from 'react-router-dom'
+
+
 export class Header extends React.Component {
     constructor ( props ) {
         super(props)
@@ -23,13 +25,26 @@ export class Header extends React.Component {
 
         return (
             <AppBar
+            style= { {
+                height: '100px'
+             } }
                 title= {`${this.props.profilePage} ${this.props.chatId}`}
-                titleStyle= { {fontFamily: 'Robotic'} }
-                iconClassNameRight="muidocs-icon-navigation-expand-more"
+                titleStyle= { {
+                    fontFamily: 'Robotic',
+                    width: '300px',
+    
+                } }
+                iconElementRight={ 
+                    <Link to={this.handlePath}>
+                    <button className='profileLink'>{this.props.buttonName}</button>
+                    </Link>
+                }
+                iconStyleRight={{margin: '15px 0 0 0' }}
+                showMenuIconButton= {false}
+                
+
             >   
-                <Link to={this.handlePath}>
-                <button className='profileLink'>{this.props.buttonName}</button>
-                </Link>
+                
             </AppBar>
         )
     }
