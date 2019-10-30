@@ -28,7 +28,6 @@ export default class Layout extends React.Component {
             <div className="row">
             <ChatList/>
                 <MessageField chatId={ this.props.chatId }/>
-                
             </div>
         </div>)
     }
