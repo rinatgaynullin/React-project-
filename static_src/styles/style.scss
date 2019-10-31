@@ -1,0 +1,109 @@
+body {
+    height: 100%;
+    margin: 0;
+}
+#root {
+    height: 100%;
+    
+    }
+    
+.layout {
+    height: 100vh;
+
+    .profileLink {
+        width: 100px;
+        height: 50px;
+        color: white;
+        font-weight: 700;
+        text-decoration: none;
+        user-select: none;
+        padding: 5px;
+        outline: none;
+        border: 2px solid;
+        border-radius: 1px;
+        transition: 0.2s;
+        &:hover {
+            background: rgba(255,255,255,.2);
+        }
+        &:active {
+            background: white;
+        }
+    }
+
+        
+    .row {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+
+            
+                
+        .message-field-row {
+            height: 100%;
+            width: 70%;
+            margin: 0 20px 20px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+
+            .message-field {
+                display: flex;
+                flex-direction: column;
+                background-color: #e2e2e2;
+                height: 80vh;
+                width: 100%;
+                padding: 20px;
+                overflow-y: scroll;
+
+
+                .message {
+                    background-color: lightblue;
+                    padding: 5px 15px;
+                    border-radius: 20px;
+                    font-size: 18px;
+                    margin: 5px;
+
+
+                    .message-sender {
+                        color: gray;
+                        font-size: 14px;
+                    }
+                        
+                }
+            }
+            .textField {
+                margin: 10px 0 0;
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+            }
+        }
+        .chatList {
+            display: flex;
+            flex-direction: column;
+            width: 30%; 
+            display: flex;
+        }  
+    }
+    .profileRow {
+        display: flex;
+        flex-direction: column;
+
+        .userName {
+            padding: 10px;
+            text-align: center;
+            margin: 30px auto 0;
+            width: 200px;
+            border-bottom: 1px solid rgb(0, 188, 212);
+        }
+        .mainProfile {
+            width: 100%;
+        }
+    }
+}
+
+
+
