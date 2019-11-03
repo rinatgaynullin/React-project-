@@ -8,6 +8,7 @@ export default class Layout extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
+            
             fieldName: 'Чат',
             nameForButton: 'Профиль'
         }
@@ -18,6 +19,8 @@ export default class Layout extends React.Component {
     static defaultProps = {
         chatId: 1,
     }
+
+
     render () {
         return (<div className='layout'> 
             <Header 
@@ -28,7 +31,6 @@ export default class Layout extends React.Component {
             <div className="row">
             <ChatList/>
                 <MessageField chatId={ this.props.chatId }/>
-                
             </div>
         </div>)
     }

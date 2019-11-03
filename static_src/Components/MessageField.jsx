@@ -10,6 +10,10 @@ export default class MessageField extends React.Component {
        chatId: PropTypes.number.isRequired,
    };
 
+   static defaultProps ={
+       chatId: 1,
+   }
+
    state = {
        chats: {
            1: {title: 'Чат 1', messageList: [1]},
@@ -19,6 +23,7 @@ export default class MessageField extends React.Component {
        messages: {
            1: { text: "Привет!", sender: 'bot' },
            2: { text: "Здравствуйте!", sender: 'bot' },
+           3: { text: "Как дела?", sender: 'bot' },
        },
        input: '',
    };
