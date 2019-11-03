@@ -4,17 +4,11 @@ import AppBar from 'material-ui/AppBar';
 import { Link } from 'react-router-dom'
 
 
-export class Header extends React.Component {
-    constructor ( props ) {
-        super(props)
-        this.state = {
-
-        }
-    }
+export default class Header extends React.Component {
     static propTypes = {
         profilePage: PropTypes.string,
 
-    };
+    }
     
     handlePath () {
             if (window.location.pathname === '/profile/') return '/'
@@ -49,3 +43,6 @@ export class Header extends React.Component {
         )
     }
 }
+
+
+

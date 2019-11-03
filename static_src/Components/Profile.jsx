@@ -1,5 +1,5 @@
 import React from 'react'
-import {Header} from './Header.jsx'
+import Header from './Header.jsx'
 
 export default class Profile extends React.Component {
     constructor (props) {
