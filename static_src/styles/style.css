@@ -11,32 +11,6 @@ body {
   height: 100vh;
 }
 
-.layout .profileLink {
-  width: 100px;
-  height: 50px;
-  color: white;
-  font-weight: 700;
-  text-decoration: none;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  padding: 5px;
-  outline: none;
-  border: 2px solid;
-  border-radius: 1px;
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
-}
-
-.layout .profileLink:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.layout .profileLink:active {
-  background: white;
-}
-
 .layout .row {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -81,20 +55,6 @@ body {
   padding: 20px;
   overflow-y: scroll;
 }
-
-.layout .row .message-field-row .message-field .message {
-  background-color: lightblue;
-  padding: 5px 15px;
-  border-radius: 20px;
-  font-size: 18px;
-  margin: 5px;
-}
-
-.layout .row .message-field-row .message-field .message .message-sender {
-  color: gray;
-  font-size: 14px;
-}
-
 .layout .row .message-field-row .textField {
   margin: 10px 0 0;
   display: -webkit-box;

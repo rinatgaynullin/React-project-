@@ -1,0 +1,25 @@
+.layout .profileLink {
+    width: 100px;
+    height: 50px;
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    padding: 5px;
+    outline: none;
+    border: 2px solid;
+    border-radius: 1px;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+  }
+  
+  .layout .profileLink:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .layout .profileLink:active {
+    background: white;
+  }
