@@ -79,25 +79,4 @@ body {
   display: flex;
 }
 
-.layout .profileRow {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.layout .profileRow .userName {
-  padding: 10px;
-  text-align: center;
-  margin: 30px auto 0;
-  width: 200px;
-  border-bottom: 1px solid #00bcd4;
-}
-
-.layout .profileRow .mainProfile {
-  width: 100%;
-}
 /*# sourceMappingURL=style.css.map */
