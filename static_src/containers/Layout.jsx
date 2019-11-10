@@ -12,11 +12,6 @@ class Layout extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
-            // messages: {
-            //     1: { text: "Привет!", sender: 'bot' },
-            //     2: { text: "Здравствуйте!", sender: 'bot' },
-            //     3: { text: "Как дела?", sender: 'bot' },
-            // },
             fieldName: 'Чат',
             nameForButton: 'Профиль'
         }
@@ -30,16 +25,6 @@ class Layout extends React.Component {
         chatId: 1,
         
     }
-
-    componentDidUpdate(prevProps, prevState) {
-        const { messages } = this.props;
-        if (Object.keys(prevProps.messages).length < Object.keys(messages).length &&
-            Object.values(messages)[Object.values(messages).length - 1].sender === 'me') {
-            setTimeout(() =>
-                this.sendMessage('Не приставай ко мне, я робот!', 'bot'), 1000);
-        }
-    }
- 
     sendMessage = (message, sender) => {
         const { chatId, messages } = this.props;
         const messageId = Object.keys(messages).length + 1; 

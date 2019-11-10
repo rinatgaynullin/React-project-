@@ -5,7 +5,9 @@ import connect from "react-redux/es/connect/connect";
 import { TextField, FloatingActionButton } from 'material-ui';
 import SendIcon from 'material-ui/svg-icons/content/send';
 import Message from '../components/Message/index.jsx';
+import { delMessage } from '../actions/delMessageActions.js';
 import '../styles/style.css';
+
 
 class MessageField extends React.Component {
     static propTypes = {
@@ -13,6 +15,7 @@ class MessageField extends React.Component {
         chats: PropTypes.object.isRequired,
         messages: PropTypes.object.isRequired,
         sendMessage: PropTypes.func.isRequired,
+        delMessage: PropTypes.func.isRequired,
     };
 
 
@@ -39,6 +42,9 @@ handleSendMessage = (message, sender) => {
            this.handleSendMessage(this.state.input, 'me')
        }
    };
+   handleDelMessage = (messageId) => {
+        this.props.delMessage( messageId )
+   };
 
    render() {
        const { chatId } = this.props;
@@ -46,8 +52,10 @@ handleSendMessage = (message, sender) => {
        const messageElements = this.props.chats[chatId].messageList.map(messageId => (
            <Message
                key={ messageId }
+               messageId={messageId}
                text={ this.props.messages[messageId].text }
                sender={ this.props.messages[messageId].sender }
+               handleDelMessage={ this.handleDelMessage }
            />));
 
        	return <div className="message-field-row">
@@ -78,7 +86,7 @@ const mapStateToProps = ({chatReducer, messageReducer}) => ({
     messages: messageReducer.messages,
  });
  
- const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
+ const mapDispatchToProps = dispatch => bindActionCreators({ delMessage }, dispatch);
  
  export default connect(mapStateToProps, mapDispatchToProps)(MessageField);
  

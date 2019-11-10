@@ -10,6 +10,7 @@ const initialStore = {
         2: {title: 'Чат 2', messageList: [2]},
         3: {title: 'Чат 3', messageList: [3]},
     },
+    backGround: false,
 };
 
 
@@ -21,8 +22,9 @@ export default function chatReducer(store = initialStore, action) {
                    title: store.chats[action.chatId].title,
                    messageList: [...store.chats[action.chatId].messageList, action.messageId]
                } } },
-        
+               
            });
+           
        }
        case ADD_CHAT: {
            const chatId = Object.keys(store.chats).length + 1;

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import AppBar from 'material-ui/AppBar';
-import { Link } from 'react-router-dom';
+import { push } from 'connected-react-router'
 import { bindActionCreators } from "redux";
 import connect from "react-redux/es/connect/connect";
 
@@ -14,6 +14,7 @@ class Header extends React.Component {
     static propTypes = {
         profilePage: PropTypes.string,
         profile: PropTypes.object.isRequired,
+        push: PropTypes.func.isRequired,
     }
     
     handlePath () {
@@ -42,13 +43,14 @@ class Header extends React.Component {
     
                 } }
                 iconElementRight={ 
-                    <Link to={this.handlePath}>
+                    
                     <button 
                         className='profileLink'
+                        onClick= {() => this.props.push(this.handlePath())}
                     >
                         {this.props.buttonName}
                     </button>
-                    </Link>
+                    
                 }
                 iconStyleRight={{margin: '0' }}
                 iconStyleLeft={{margin: '0' }}
@@ -70,6 +72,6 @@ const mapStateToProps = ({profileReducer}) => ({
     profile: profileReducer.profile
  });
  
- const mapDispatchToProps = dispatch => bindActionCreators({ }, dispatch);
+ const mapDispatchToProps = dispatch => bindActionCreators({ push }, dispatch);
  
  export default connect(mapStateToProps, mapDispatchToProps)(Header);
