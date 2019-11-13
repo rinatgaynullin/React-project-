@@ -1,0 +1,12 @@
+.layout .row .message-field-row .message-field .message {
+    background-color: lightblue;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 18px;
+    margin: 5px;
+  }
+  
+  .layout .row .message-field-row .message-field .message .message-sender {
+    color: gray;
+    font-size: 14px;
+  }
