@@ -8,6 +8,7 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import initReducers from './../reducers';
 import middlewares from '../middlewares';
 
+
 const persistConfig = {
     key: 'geekmessanger',
     storage,
@@ -26,7 +27,7 @@ function initStore() {
         persistReducer(persistConfig, initReducers(history)), 
         innitialStore,
         compose(
-            applyMiddleware(routerMiddleware(history),...middlewares),
+            applyMiddleware(routerMiddleware(history), ...middlewares),
             window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : () => {},
         ),
     );

@@ -4,6 +4,7 @@ import { DEL_MESSAGE } from '../actions/delMessageActions';
 
 
 
+
 const initialStore = {
     messages: {
         1: { text: "Привет!", sender: 'bot' },
@@ -23,11 +24,14 @@ export default function messageReducer(store = initialStore, action) {
             })
         }
         case DEL_MESSAGE: {
-            
-               
-            
+            const messageId = action.messageId
+            let messages = Object.assign({}, store.messages)
+            delete messages[messageId]
+            return update(store, { $set: { messages } })
             
         }
+
+            
         default:
             return store;
     }

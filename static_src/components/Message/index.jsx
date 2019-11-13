@@ -4,7 +4,7 @@ import './style.css'
 
 export default class Message extends React.Component {
 	static propTypes = {
-		handleDelMessage: PropTypes.func.isRequired,
+	
 
 	}
 	constructor(props) { 
@@ -18,10 +18,7 @@ export default class Message extends React.Component {
 		>
 		<div>{ this.props.text }</div>
 		<div className="message-sender">{ this.props.sender }</div>
-		<button
-			onClick= { () => this.props.handleDelMessage(this.props.messageId)}	
-		>X</button>
-		
+	
 		
 		</div>
 

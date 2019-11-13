@@ -1,4 +1,4 @@
-.layout .row .message-field-row .message-field .message {
+.message {
     background-color: lightblue;
     padding: 5px 15px;
     border-radius: 20px;
@@ -6,7 +6,7 @@
     margin: 5px;
   }
   
-  .layout .row .message-field-row .message-field .message .message-sender {
+.message-sender {
     color: gray;
     font-size: 14px;
   }
