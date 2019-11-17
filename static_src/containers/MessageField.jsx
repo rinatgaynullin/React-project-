@@ -4,11 +4,15 @@ import { bindActionCreators } from "redux";
 import connect from "react-redux/es/connect/connect";
 import { TextField, FloatingActionButton } from 'material-ui';
 import SendIcon from 'material-ui/svg-icons/content/send';
+import { loadProfile } from '../actions/profileActions'
+import { loadChats } from '../actions/chatActions';
 import Message from '../components/Message/index.jsx';
 import { delMessage } from '../actions/delMessageActions'
+import { loadMessages } from '../actions/messageActions'
+import CircularProgress from 'material-ui/CircularProgress';
 import '../styles/style.css';
-import { NotificationWc } from 'material-ui/svg-icons';
-import dateRange from 'material-ui/svg-icons/action/date-range';
+import profileReducer from '../reducers/profileReducer';
+
 
 
 class MessageField extends React.Component {
@@ -18,6 +22,8 @@ class MessageField extends React.Component {
         messages: PropTypes.object.isRequired,
         sendMessage: PropTypes.func.isRequired,
         delMessage: PropTypes.func.isRequired,
+        isLoading: PropTypes.bool.isRequired,
+        isProfileLoading: PropTypes.bool.isRequired,
     };
 
 
@@ -25,31 +31,42 @@ class MessageField extends React.Component {
         input: '',
     };
 
-
-handleSendMessage = (message, sender) => {
-    if (this.state.input.length > 0 || sender === 'bot') {
-        this.props.sendMessage(message, sender)
+    componentDidMount() {
+        this.props.loadMessages();
+        this.props.loadChats();
     }
-    if (sender === 'me') {
-        this.setState({ input: '' })
-    }
-};
 
-   handleChange = (event) => {
-       this.setState({ [event.target.name]: event.target.value });
-   };
+    handleSendMessage = (message, sender) => {
+        if (this.state.input.length > 0 || sender === 'bot') {
+            this.props.sendMessage(message, sender)
+        }
+        if (sender === 'me') {
+            this.setState({ input: '' })
+        }
+    };
 
-   handleKeyUp = (event) => {
-       if (event.keyCode === 13) { // Enter
-           this.handleSendMessage(this.state.input, 'me')
-       }
-   };
+    handleChange = (event) => {
+        this.setState({ [event.target.name]: event.target.value });
+    };
+
+    handleKeyUp = (event) => {
+        if (event.keyCode === 13) { // Enter
+            this.handleSendMessage(this.state.input, 'me')
+        }
+    };
   
-   render() {
-       const { chatId } = this.props;
+    render() {
+        if (this.props.isLoading) {
+            return <CircularProgress/>
+        } 
 
-       const messageElements = this.props.chats[chatId].messageList.map(messageId => (
-			<div className="messageBlock">
+        const { chatId } = this.props;
+
+        const messageElements = this.props.chats[chatId].messageList.map(messageId => (
+			<div 
+				className="messageBlock"
+				style={ { alignSelf: this.props.messages[messageId].sender === 'bot' ?'flex-start' : 'flex-end' }}
+			>
                 <Message
                     key={ messageId }
                     messageId={messageId}
@@ -58,11 +75,11 @@ handleSendMessage = (message, sender) => {
                 />
 				<button
 				key={Date.now()} 
-				style={ { alignSelf: this.props.messages[messageId].sender === 'bot' ?'flex-start' : 'flex-end' } }
+				style={ { alignSelf: this.props.messages[messageId].sender === 'bot' ?'flex-end' : 'flex-start' } }
 				onClick = {() =>  this.props.delMessage (messageId,this.props.chatId)}>X</button>
 			</div>
                 
-           ));
+        ));
 
        	return <div className="message-field-row">
 		    <div className='message-field'>
@@ -81,7 +98,7 @@ handleSendMessage = (message, sender) => {
                 <FloatingActionButton 
                     onClick={ () => this.handleSendMessage( this.state.input, 'me' ) 
                 }>
-                    <SendIcon />
+                    <SendIcon/>
                 </FloatingActionButton>
             </div>
 		</div>
@@ -90,10 +107,17 @@ handleSendMessage = (message, sender) => {
 const mapStateToProps = ({chatReducer, messageReducer}) => ({
     chats: chatReducer.chats,
     messages: messageReducer.messages,
- });
- 
- const mapDispatchToProps = dispatch => bindActionCreators({ delMessage  }, dispatch);
- 
- export default connect(mapStateToProps, mapDispatchToProps)(MessageField);
- 
+    isLoading: chatReducer.isLoading,
+    isProfileLoading: profileReducer.isProfileLoading,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({ 
+    delMessage,
+    loadChats, 
+    loadMessages,
+    loadProfile 
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(MessageField);
+
 

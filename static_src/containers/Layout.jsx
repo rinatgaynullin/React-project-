@@ -16,22 +16,21 @@ class Layout extends React.Component {
             nameForButton: 'Профиль'
         }
     }
+
     static propTypes = {
         chatId: PropTypes.number.isRequired,
         sendMessage: PropTypes.func.isRequired, 
         messages: PropTypes.object.isRequired,      
     }
+
     static defaultProps = {
         chatId: 1,
-        
     }
     sendMessage = (message, sender) => {
         const { chatId, messages } = this.props;
         const messageId = Object.keys(messages).length + 1; 
         this.props.sendMessage(messageId, message, sender, chatId)
     };
- 
- 
 
     render () {
         return (<div className='layout'> 
@@ -39,14 +38,13 @@ class Layout extends React.Component {
                 buttonName={this.state.nameForButton}
                 chatId={this.props.chatId}
                 profilePage={this.state.fieldName}
-            ></Header>
+            />
             <div className="row">
-            <ChatList 
-            />
-            <MessageField 
-                chatId={ this.props.chatId }
-                sendMessage={ this.sendMessage }
-            />
+                <ChatList/>
+                <MessageField 
+                    chatId={ this.props.chatId }
+                    sendMessage={ this.sendMessage }
+                />
             </div>
         </div>)
     }

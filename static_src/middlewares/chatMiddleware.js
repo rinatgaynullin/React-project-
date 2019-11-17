@@ -1,16 +1,12 @@
 import { SEND_MESSAGE } from "../actions/messageActions.js";
-import { alertNewBotMessage } from '../actions/chatActions'
-import { DEL_MESSAGE } from "../actions/delMessageActions.js";
+import { alertNewBotMessage } from '../actions/chatActions.js'
+export default store => next => (action) => {
+	switch (action.type) {
+		case SEND_MESSAGE:
+		 	if (action.sender === 'bot') {
+				store.dispatch(alertNewBotMessage(action.chatId))
 
-export default store => next => (action,dispatch) => {
-    switch (action.type) {
-        case SEND_MESSAGE:
-         if (action.sender === 'bot') {
-            alertNewBotMessage()
-
-            
-         }
-    }
-    return next(action)
- }
- 
+		 	}
+	}
+	return next(action)
+}

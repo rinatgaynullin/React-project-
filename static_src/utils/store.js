@@ -13,9 +13,8 @@ const persistConfig = {
     key: 'geekmessanger',
     storage,
     stateReconciler: autoMergeLevel2,
-    whitelist: ['messageReducer', 'chatReducer'],
- };
- 
+    whitelist: [],
+};
 
 export const history = createBrowserHistory()
 
@@ -24,7 +23,8 @@ function initStore() {
     const innitialStore = {};
 
     const store = createStore(
-        persistReducer(persistConfig, initReducers(history)), 
+        persistReducer(persistConfig, 
+        initReducers(history)), 
         innitialStore,
         compose(
             applyMiddleware(routerMiddleware(history), ...middlewares),
@@ -33,7 +33,7 @@ function initStore() {
     );
     const persistor = persistStore(store);
 
-   return { store, persistor };
+    return { store, persistor };
 
 }
 

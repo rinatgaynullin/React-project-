@@ -3,7 +3,9 @@ import Header from './Header.jsx'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from "redux";
 import connect from "react-redux/es/connect/connect";
+import CircularProgress from 'material-ui/CircularProgress';
 import '../styles/profile.css'
+import { loadProfile } from '../actions/profileActions'
 
 class Profile extends React.Component {
     constructor (props) {
@@ -16,9 +18,16 @@ class Profile extends React.Component {
 
     static propTypes = {
         profile: PropTypes.object.isRequired,
+        isProfileLoading: PropTypes.bool.isRequired,
+    }
+    componentDidMount () {
+        this.props.loadProfile()
     }
     
     render () {
+        if (this.props.isProfileLoading) {
+            return <CircularProgress/>
+        }
         return (<div className='layout'> 
         <Header 
             buttonName={this.state.nameForButton}
@@ -47,9 +56,10 @@ class Profile extends React.Component {
 }
 
 const mapStateToProps = ({profileReducer}) => ({
-    profile: profileReducer.profile
- });
- 
- const mapDispatchToProps = dispatch => bindActionCreators({ }, dispatch);
- 
- export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+    profile: profileReducer.profile,
+    isProfileLoading: profileReducer.isProfileLoading,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({ loadProfile }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

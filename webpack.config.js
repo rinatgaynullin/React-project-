@@ -38,7 +38,6 @@ module.exports = {
                 test: /\.css$/,
                 loader: 'style-loader!css-loader',
             },
-     
         ]
     },
     devServer: {
@@ -46,7 +45,7 @@ module.exports = {
         historyApiFallback: {
             index: 'index.html'
         }
-     },
-     devtool: 'cheap-inline-module-source-map',
+    },
+    devtool: 'cheap-inline-module-source-map',
 
 };
