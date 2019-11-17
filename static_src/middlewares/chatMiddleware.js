@@ -1,16 +1,15 @@
 import { SEND_MESSAGE } from "../actions/messageActions.js";
+import { alertNewBotMessage } from '../actions/chatActions'
+import { DEL_MESSAGE } from "../actions/delMessageActions.js";
 
-
-export default store => next => (action) => {
+export default store => next => (action,dispatch) => {
     switch (action.type) {
         case SEND_MESSAGE:
-         if (action.sender === 'me') {
-            store.dispatch(
-               store.getState().chatReducer.backGround = true),
-           setTimeout(() => store.dispatch(
-              store.getState().chatReducer.backGround = false),1000)
+         if (action.sender === 'bot') {
+            alertNewBotMessage()
+
+            
          }
-        
     }
     return next(action)
  }

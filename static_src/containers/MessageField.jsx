@@ -5,8 +5,10 @@ import connect from "react-redux/es/connect/connect";
 import { TextField, FloatingActionButton } from 'material-ui';
 import SendIcon from 'material-ui/svg-icons/content/send';
 import Message from '../components/Message/index.jsx';
-import { delMessage } from '../actions/delMessageActions.js';
+import { delMessage } from '../actions/delMessageActions'
 import '../styles/style.css';
+import { NotificationWc } from 'material-ui/svg-icons';
+import dateRange from 'material-ui/svg-icons/action/date-range';
 
 
 class MessageField extends React.Component {
@@ -42,21 +44,25 @@ handleSendMessage = (message, sender) => {
            this.handleSendMessage(this.state.input, 'me')
        }
    };
-   handleDelMessage = (messageId) => {
-        this.props.delMessage( messageId )
-   };
-
+  
    render() {
        const { chatId } = this.props;
 
        const messageElements = this.props.chats[chatId].messageList.map(messageId => (
-           <Message
-               key={ messageId }
-               messageId={messageId}
-               text={ this.props.messages[messageId].text }
-               sender={ this.props.messages[messageId].sender }
-               handleDelMessage={ this.handleDelMessage }
-           />));
+			<div className="messageBlock">
+                <Message
+                    key={ messageId }
+                    messageId={messageId}
+                    text={ this.props.messages[messageId].text }
+					sender={ this.props.messages[messageId].sender }
+                />
+				<button
+				key={Date.now()} 
+				style={ { alignSelf: this.props.messages[messageId].sender === 'bot' ?'flex-start' : 'flex-end' } }
+				onClick = {() =>  this.props.delMessage (messageId,this.props.chatId)}>X</button>
+			</div>
+                
+           ));
 
        	return <div className="message-field-row">
 		    <div className='message-field'>
@@ -86,7 +92,7 @@ const mapStateToProps = ({chatReducer, messageReducer}) => ({
     messages: messageReducer.messages,
  });
  
- const mapDispatchToProps = dispatch => bindActionCreators({ delMessage }, dispatch);
+ const mapDispatchToProps = dispatch => bindActionCreators({ delMessage  }, dispatch);
  
  export default connect(mapStateToProps, mapDispatchToProps)(MessageField);
  

@@ -42,7 +42,6 @@ class Layout extends React.Component {
             ></Header>
             <div className="row">
             <ChatList 
-                
             />
             <MessageField 
                 chatId={ this.props.chatId }

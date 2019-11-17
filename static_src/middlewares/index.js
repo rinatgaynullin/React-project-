@@ -4,5 +4,5 @@ import chatMiddleware from './chatMiddleware.js';
 
 export default [
     messageMiddleware,
-    // chatMiddleware,
+    chatMiddleware,
 ];
