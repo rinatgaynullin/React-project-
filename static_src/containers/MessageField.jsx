@@ -11,7 +11,6 @@ import { delMessage } from '../actions/delMessageActions';
 import { loadMessages } from '../actions/messageActions';
 import CircularProgress from 'material-ui/CircularProgress';
 import '../styles/style.css';
-import profileReducer from '../reducers/profileReducer';
 
 
 
@@ -31,10 +30,9 @@ class MessageField extends React.Component {
     };
 
     componentDidMount() {
-        this.props.loadMessages();
         this.props.loadChats();
+        this.props.loadMessages();
         this.props.loadProfile();
-        
     }
 
     handleSendMessage = (message, sender) => {

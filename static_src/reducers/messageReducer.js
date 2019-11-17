@@ -36,27 +36,27 @@ export default function messageReducer(store = initialStore, action) {
             return update(store, { $set: { messages } })
             
         }
-        // case START_MESSAGES_LOADING: {
-        //     return update(store, {
-        //         isLoading: { $set: true},
-        //     });
-        // }
-        // case SUCCESS_MESSAGES_LOADING: {
-        //     const messages = {};
-        //     action.payload.forEach(message => {
-        //         const { text, sender} = message;
-        //         messages[message.id] = { text, sender };
-        //     });
-        //     return update(store, {
-        //         messages: { $set: messages},
-        //         isLoading: { $set: false},
-        //     });
-        // }
-        // case ERROR_MESSAGES_LOADING: {
-        //     return update(store, {
-        //         isLoading: { $set: false},
-        //     });
-        // }
+        case START_MESSAGES_LOADING: {
+            return update(store, {
+                isLoading: { $set: true},
+            });
+        }
+        case SUCCESS_MESSAGES_LOADING: {
+            const messages = {};
+            action.payload.forEach(message => {
+                const { text, sender} = message;
+                messages[message.id] = { text, sender };
+            });
+            return update(store, {
+                messages: { $merge: messages},
+                isLoading: { $set: false},
+            });
+        }
+        case ERROR_MESSAGES_LOADING: {
+            return update(store, {
+                isLoading: { $set: false},
+            });
+        }
         case START_CHATS_LOADING: {
             return update(store, {
                 isLoading: { $set: true },
@@ -64,7 +64,7 @@ export default function messageReducer(store = initialStore, action) {
         }
         case SUCCESS_CHATS_LOADING: {
             return update(store, {
-                messages: { $set: action.payload.entities.messages },
+                messages: { $merge: action.payload.entities.messages },
             });
         }
         case ERROR_CHATS_LOADING: {

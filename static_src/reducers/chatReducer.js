@@ -21,17 +21,17 @@ export default function chatReducer(store = initialStore, action) {
                 } } },
             });
         }
-        // case SUCCESS_MESSAGES_LOADING: {
-        //     const chats = {...store.chats};
-        //     action.payload.forEach(message => {
-        //         const { id, chatId } = message;
-        //         chats[chatId].messageList.push(id);
-        //     });
-        //     return update(store, {
-        //         chats: { $set: chats },
-        //         isLoading: { $set: false },
-        //     });
-        // }
+        case SUCCESS_MESSAGES_LOADING: {
+            const chats = {...store.chats};
+            action.payload.forEach(message => {
+                const { id, chatId } = message;
+                chats[chatId].messageList.push(id);
+            });
+            return update(store, {
+                chats: { $merge: chats },
+                isLoading: { $set: false },
+            });
+        }
         case SUCCESS_CHATS_LOADING: {
             return update(store, {
                 chats: { $set: action.payload.entities.chats },
