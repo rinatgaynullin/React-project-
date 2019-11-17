@@ -4,11 +4,11 @@ import { bindActionCreators } from "redux";
 import connect from "react-redux/es/connect/connect";
 import { TextField, FloatingActionButton } from 'material-ui';
 import SendIcon from 'material-ui/svg-icons/content/send';
-import { loadProfile } from '../actions/profileActions'
 import { loadChats } from '../actions/chatActions';
 import Message from '../components/Message/index.jsx';
-import { delMessage } from '../actions/delMessageActions'
-import { loadMessages } from '../actions/messageActions'
+import { loadProfile } from '../actions/profileActions';
+import { delMessage } from '../actions/delMessageActions';
+import { loadMessages } from '../actions/messageActions';
 import CircularProgress from 'material-ui/CircularProgress';
 import '../styles/style.css';
 import profileReducer from '../reducers/profileReducer';
@@ -23,7 +23,6 @@ class MessageField extends React.Component {
         sendMessage: PropTypes.func.isRequired,
         delMessage: PropTypes.func.isRequired,
         isLoading: PropTypes.bool.isRequired,
-        isProfileLoading: PropTypes.bool.isRequired,
     };
 
 
@@ -34,6 +33,8 @@ class MessageField extends React.Component {
     componentDidMount() {
         this.props.loadMessages();
         this.props.loadChats();
+        this.props.loadProfile();
+        
     }
 
     handleSendMessage = (message, sender) => {
@@ -108,14 +109,13 @@ const mapStateToProps = ({chatReducer, messageReducer}) => ({
     chats: chatReducer.chats,
     messages: messageReducer.messages,
     isLoading: chatReducer.isLoading,
-    isProfileLoading: profileReducer.isProfileLoading,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ 
     delMessage,
     loadChats, 
     loadMessages,
-    loadProfile 
+    loadProfile,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessageField);

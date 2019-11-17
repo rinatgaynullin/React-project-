@@ -5,6 +5,7 @@ import { push } from 'connected-react-router'
 import { bindActionCreators } from "redux";
 import connect from "react-redux/es/connect/connect";
 import '../styles/header.css';
+import CircularProgress from 'material-ui/CircularProgress';
 
 
 class Header extends React.Component {
@@ -13,14 +14,17 @@ class Header extends React.Component {
         profilePage: PropTypes.string,
         profile: PropTypes.object.isRequired,
         push: PropTypes.func.isRequired,
+        isProfileLoading: PropTypes.bool.isRequired,
     }
 
     handlePath () {
             if (window.location.pathname === '/profile/') return '/'
             else return '/profile/'   
         }
-    
     render () {
+        if (this.props.isProfileLoading) {
+            return <CircularProgress/>
+        }
         return (
             <AppBar
                 className= 'header'
@@ -49,7 +53,7 @@ class Header extends React.Component {
                 showMenuIconButton= {true}
                 iconElementLeft= {
                     <div className="profileName" >
-                        {/* {this.props.profile[1].name} */}
+                        {this.props.profile[1].name}
                     </div>
                 }
             >   
@@ -59,7 +63,8 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = ({profileReducer}) => ({
-    profile: profileReducer.profile
+    profile: profileReducer.profile,
+    isProfileLoading: profileReducer.isProfileLoading,
 
 });
 
