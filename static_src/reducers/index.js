@@ -4,6 +4,7 @@ import { connectRouter } from 'connected-react-router'
 import chatReducer from './chatReducer';
 import messageReducer from './messageReducer'
 import profileReducer from './profileReducer'
+import botAnswerReducer from './botAnswerReducer'
 
 
 export default (history) => combineReducers({
@@ -11,4 +12,6 @@ export default (history) => combineReducers({
     chatReducer,
     messageReducer,
     profileReducer,
+    botAnswerReducer,
+
 });

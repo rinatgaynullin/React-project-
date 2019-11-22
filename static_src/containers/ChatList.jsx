@@ -25,7 +25,7 @@ class ChatList extends  React.Component {
 		chats: PropTypes.object.isRequired,
 		addChat: PropTypes.func.isRequired,
 		push: PropTypes.func.isRequired,
-		delChat: PropTypes.func.isRequired
+		delChat: PropTypes.func.isRequired,
 	}
 
 	handleChange = (event) => {
@@ -55,23 +55,22 @@ class ChatList extends  React.Component {
 			   		key={chatId}
 				    primaryText={ chats[chatId].title }
 				    leftAvatar={<Avatar src="https://placehold.it/50x50" />}
-					
+					style={{backgroundColor: this.propsbgStyle }}
                     leftIcon={ 
 						<ContentSend/>
 					}
 				    onClick= {
 						() => this.props.push( `/chat/${chatId}` ) 
 					}
-			   />
-			   <button 
-			   key={Date.now()}
-			   onClick= { () => this.props.delChat(chatId)}> X </button>
+			    />
+			    <button 
+			   		key={Date.now()}
+			    	onClick= { () => this.props.delChat(chatId)}> X 
+				</button>
 			</div>
-			   
-			  
-			   ));
+			));
 		
-  return (<div className='chatList'>
+    return (<div className='chatList'>
 	<List>
 	  	{ chatElement }
 		<ListItem
@@ -79,28 +78,30 @@ class ChatList extends  React.Component {
             leftIcon={ <AddIcon /> }
             onClick={ this.handleAddChat }
             style={ { height: '60px' } }
-            children= {<TextField
-            	key="textField"
-            	fullWidth
-                name="input"
-                hintText="Добавить новый чат"
-                onChange={ this.handleChange }
-                value={ this.state.input }
-				onKeyUp={ this.handleKeyUp }
-			/>}
+            children= {
+				<TextField
+            		key="textField"
+            		fullWidth
+                	name="input"
+                	hintText="Добавить новый чат"
+                	onChange={ this.handleChange }
+                	value={ this.state.input }
+					onKeyUp={ this.handleKeyUp }
+				/>
+			}
 		/>
 	</List>
 	
 	
 </div>
 )
-  }
+    }
 }
 const mapStateToProps = ({ chatReducer }) => ({
 	chats: chatReducer.chats,
- });
- 
- const mapDispatchToProps = dispatch => bindActionCreators({ addChat, push, delChat }, dispatch);
- 
- export default connect(mapStateToProps, mapDispatchToProps)(ChatList);
- 
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({ addChat, push, delChat }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChatList);
+

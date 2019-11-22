@@ -4,26 +4,27 @@ import AppBar from 'material-ui/AppBar';
 import { push } from 'connected-react-router'
 import { bindActionCreators } from "redux";
 import connect from "react-redux/es/connect/connect";
+import '../styles/header.css';
+import CircularProgress from 'material-ui/CircularProgress';
 
-import '../styles/header.css'
 
 class Header extends React.Component {
-    state ={
-        profileId: 1
-    }
+
     static propTypes = {
         profilePage: PropTypes.string,
         profile: PropTypes.object.isRequired,
         push: PropTypes.func.isRequired,
+        isProfileLoading: PropTypes.bool.isRequired,
     }
-    
+
     handlePath () {
             if (window.location.pathname === '/profile/') return '/'
             else return '/profile/'   
         }
-    
     render () {
-
+        if (this.props.isProfileLoading) {
+            return <CircularProgress/>
+        }
         return (
             <AppBar
                 className= 'header'
@@ -37,20 +38,15 @@ class Header extends React.Component {
                     fontFamily: 'Robotic',
                     width: '300px',
                     margin: '0',
-                    // flex: 'none'
                     flex: '0.5 0 100px'
-                    
-    
                 } }
                 iconElementRight={ 
-                    
                     <button 
                         className='profileLink'
                         onClick= {() => this.props.push(this.handlePath())}
                     >
                         {this.props.buttonName}
                     </button>
-                    
                 }
                 iconStyleRight={{margin: '0' }}
                 iconStyleLeft={{margin: '0' }}
@@ -60,8 +56,6 @@ class Header extends React.Component {
                         {this.props.profile[1].name}
                     </div>
                 }
-                
-               
             >   
             </AppBar>
         )
@@ -69,9 +63,11 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = ({profileReducer}) => ({
-    profile: profileReducer.profile
- });
- 
- const mapDispatchToProps = dispatch => bindActionCreators({ push }, dispatch);
- 
- export default connect(mapStateToProps, mapDispatchToProps)(Header);
+    profile: profileReducer.profile,
+    isProfileLoading: profileReducer.isProfileLoading,
+
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({ push }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
