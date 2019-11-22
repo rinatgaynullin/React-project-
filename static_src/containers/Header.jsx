@@ -25,8 +25,10 @@ class Header extends React.Component {
         if (this.props.isProfileLoading) {
             return <CircularProgress/>
         }
-        return (
+        return ([
+            
             <AppBar
+                key="AppBar"
                 className= 'header'
                 style= { {
                     height: '100px',
@@ -36,8 +38,7 @@ class Header extends React.Component {
                 title= {`${this.props.profilePage} ${this.props.chatId}`}
                 titleStyle= { {
                     fontFamily: 'Robotic',
-                    width: '300px',
-                    margin: '0',
+                    width: '30%',
                     flex: '0.5 0 100px'
                 } }
                 iconElementRight={ 
@@ -58,6 +59,7 @@ class Header extends React.Component {
                 }
             >   
             </AppBar>
+        ]
         )
     }
 }

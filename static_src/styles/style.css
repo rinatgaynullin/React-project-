@@ -1,4 +1,5 @@
 body {
+    padding: 0;
   	height: 100%;
   	margin: 0;
 }
@@ -6,9 +7,12 @@ body {
   	height: 100%;
 }
 .layout {
-  	height: 100vh;
+      height: 100vh;
+      padding: 5px;
 }
 .layout .row {
+    padding-left: 10px;
+    padding-right: 10px;
  	display: -webkit-box;
   	display: -ms-flexbox;
   	display: flex;
@@ -21,7 +25,7 @@ body {
 .message-field-row {
     height: 100%;
     width: 70%;
-    margin: 0 20px 20px 20px;
+    margin: 0;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -48,7 +52,7 @@ body {
     background-color: #e2e2e2;
     height: 80vh;
     width: 100%;
-    padding: 20px;
+    padding: 0;
     overflow-y: scroll;
 }
 .textField {
@@ -94,5 +98,17 @@ body {
     padding: 0;
     border-color: black transparent 1px;
     box-shadow: 0;
+}
+
+@media screen and (max-width: 650px) {
+    .layout .row {
+        flex-direction: column;
+    }
+    .message-field-row {
+        width: 100%;
+    }
+    .chatList {
+        width: 100%;
+    }
 }
 /*# sourceMappingURL=style.css.map */

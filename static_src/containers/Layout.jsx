@@ -6,6 +6,7 @@ import ChatList from './ChatList.jsx'
 import Header from './Header.jsx'
 import PropTypes from 'prop-types'
 import { sendMessage } from "../actions/messageActions";
+import PushToggle from '../components/PushToggle/index.jsx';
 
 
 class Layout extends React.Component {
@@ -34,6 +35,7 @@ class Layout extends React.Component {
 
     render () {
         return (<div className='layout'> 
+         <PushToggle  key= "PushToggle"/>
             <Header 
                 buttonName={this.state.nameForButton}
                 chatId={this.props.chatId}

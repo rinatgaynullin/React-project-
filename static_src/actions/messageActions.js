@@ -25,7 +25,7 @@ export const ERROR_MESSAGES_LOADING = '@@message/ERROR_MESSAGES_LOADING';
 
 export const loadMessages = () => ({
     [RSAA]: {
-        endpoint: '/api/messages.json',
+        endpoint: '/static_src/server/api/messages.json',
         method: 'GET',
         types: [
             START_MESSAGES_LOADING,

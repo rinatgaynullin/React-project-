@@ -7,7 +7,7 @@ export const ERROR_PROFILE_LOADING = '@@profile/ERROR_PROFILE_LOADING';
 
 export const loadProfile = () => ({
     [RSAA]: {
-        endpoint: '/api/profile.json',
+        endpoint: '/static_src/server/api/profile.json',
         method: 'GET',
         types: [
             START_PROFILE_LOADING,
