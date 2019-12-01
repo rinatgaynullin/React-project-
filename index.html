@@ -4,14 +4,14 @@
    <meta charset="UTF-8">
    <title>React</title>
    <!-- Манифест. Сообщает браузеру что мы PWA -->
-   <link rel="manifest" href="static/manifest/manifest.json">
+   <!-- <link rel="manifest" href="static/manifest/manifest.json"> -->
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 </head>
 <body>
    <div id="root"></div>   
-   <script src="/static/build/app.js"></script>
-   <script>
+   <script src="static/build/app.js"></script>
+   <!-- <script>
       if ('serviceWorker' in navigator) {
          window.addEventListener('load', function() {
             navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
@@ -36,8 +36,8 @@
           });
       });
     </script>
-    <script src ='/notificatotion.js'></script>
-    
+    <script src ='./notificatotion.js'></script>
+     -->
    
 </body>
 </html>

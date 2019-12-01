@@ -2,7 +2,7 @@ const webpack = require('webpack')
 const path = require('path')
 module.exports = {
     entry: {
-        app: './index.jsx',
+        app: 'index.jsx',
     },
     context: path.resolve(__dirname,"static_src"),
     output: {
@@ -40,6 +40,10 @@ module.exports = {
             },
         ]
     },
+    resolve: {
+        modules: [path.resolve(__dirname, "static_src"), 'node_modules'],
+        extensions: ['.js', '.jsx'],
+     },
     devServer: {
         port: 8080,
         historyApiFallback: {
