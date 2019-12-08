@@ -11,15 +11,6 @@ app.get('/', (req, res) => {
 	res.sendFile('index', { root : __dirname +'/static/build'});
 });
 
-app.get('/api/messages', (req, res) => {
-	fs.readFile('api/messages.json', 'utf-8', (err,data) => {
-		if (err) {
-			res.sendStatus(404, JSON.stringify({result:0, text:err}));
-		} else {
-			res.send(data)
-		}
-	})	
-})
 app.get('/api/chats', (req, res) => {
 	fs.readFile('api/chats.json', 'utf-8', (err,data) => {
 		if (err) {

@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import connect from "react-redux/es/connect/connect";
 import CircularProgress from 'material-ui/CircularProgress';
 import '../styles/profile.css'
-import { loadProfile } from '../actions/profileActions'
+import { profileFetchData } from '../actions/profileActions'
 
 class Profile extends React.Component {
     constructor (props) {
@@ -20,8 +20,8 @@ class Profile extends React.Component {
         profile: PropTypes.object.isRequired,
         isProfileLoading: PropTypes.bool.isRequired,
     }
-    componentDidMount () {
-        this.props.loadProfile()
+    UNSAFE_componentWillMount () {
+        this.props.fetchData('/api/profile')
     }
     
     render () {
@@ -60,6 +60,8 @@ const mapStateToProps = ({profileReducer}) => ({
     isProfileLoading: profileReducer.isProfileLoading,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ loadProfile }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ 
+    fetchData: url => profileFetchData(url, dispatch)
+ }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

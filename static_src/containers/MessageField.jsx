@@ -4,11 +4,10 @@ import { bindActionCreators } from "redux";
 import connect from "react-redux/es/connect/connect";
 import { TextField, FloatingActionButton } from 'material-ui';
 import SendIcon from 'material-ui/svg-icons/content/send';
-import { loadChats } from '../actions/chatActions';
+import { chatsFetchData } from '../actions/chatActions';
 import Message from '../components/Message/index.jsx';
 import { loadProfile } from '../actions/profileActions';
-import { delMessage } from '../actions/delMessageActions';
-import { loadMessages } from '../actions/messageActions';
+import { delMessage } from '../actions/messageActions';
 import CircularProgress from 'material-ui/CircularProgress';
 import '../styles/style.css';
 
@@ -29,10 +28,8 @@ class MessageField extends React.Component {
         input: '',
     };
 
-    componentDidMount() {
-        this.props.loadChats();
-        this.props.loadMessages();
-        this.props.loadProfile();
+    UNSAFE_componentWillMount() {
+        this.props.fetchData('http://localhost:5001/api/chats')
     }
 
     handleSendMessage = (message, sender) => {
@@ -111,9 +108,7 @@ const mapStateToProps = ({chatReducer, messageReducer}) => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({ 
     delMessage,
-    loadChats, 
-    loadMessages,
-    loadProfile,
+    fetchData: url => chatsFetchData(url,dispatch),
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessageField);

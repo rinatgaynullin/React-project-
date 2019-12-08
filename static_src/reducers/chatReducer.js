@@ -1,8 +1,8 @@
 
 import update from 'react-addons-update';
-import { SEND_MESSAGE, SUCCESS_MESSAGES_LOADING } from '../actions/messageActions.js';
+import { SEND_MESSAGE } from '../actions/messageActions.js';
 import { ADD_CHAT, DEL_CHAT, BOT_ANSWER, SUCCESS_CHATS_LOADING } from "../actions/chatActions.js";
-import { DEL_MESSAGE } from '../actions/delMessageActions.js';
+import { DEL_MESSAGE } from '../actions/messageActions.js';
 
 
 const initialStore = {
@@ -21,21 +21,12 @@ export default function chatReducer(store = initialStore, action) {
                 } } },
             });
         }
-        case SUCCESS_MESSAGES_LOADING: {
-            const chats = {...store.chats};
-            action.payload.forEach(message => {
-                const { id, chatId } = message;
-                chats[chatId].messageList.push(id);
-            });
-            return update(store, {
-                chats: { $merge: chats },
-                isLoading: { $set: false },
-            });
-        }
         case SUCCESS_CHATS_LOADING: {
+            console.log(store)
             return update(store, {
                 chats: { $set: action.payload.entities.chats },
                 isLoading: { $set: false },
+                
             });
         } 
         case ADD_CHAT: {

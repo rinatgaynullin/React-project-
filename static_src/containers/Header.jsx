@@ -22,9 +22,7 @@ class Header extends React.Component {
             else return '/profile/'   
         }
     render () {
-        if (this.props.isProfileLoading) {
-            return <CircularProgress/>
-        }
+        
         return ([
             
             <AppBar
@@ -52,11 +50,11 @@ class Header extends React.Component {
                 iconStyleRight={{margin: '0' }}
                 iconStyleLeft={{margin: '0' }}
                 showMenuIconButton= {true}
-                iconElementLeft= {
-                    <div className="profileName" >
-                        {this.props.profile[1].name}
-                    </div>
-                }
+                // iconElementLeft= {
+                //     <div className="profileName" >
+                //         {this.props.profile[1].name}
+                //     </div>
+                // }
             >   
             </AppBar>
         ]
