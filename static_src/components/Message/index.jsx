@@ -4,8 +4,6 @@ import './style.css'
 
 export default class Message extends React.Component {
 	static propTypes = {
-	
-
 	}
 	constructor(props) { 
     super (props) 

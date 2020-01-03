@@ -4,9 +4,8 @@ import { bindActionCreators } from "redux";
 import connect from "react-redux/es/connect/connect";
 import { TextField, FloatingActionButton } from 'material-ui';
 import SendIcon from 'material-ui/svg-icons/content/send';
-import { chatsFetchData } from '../actions/chatActions';
+import chatsFetchData from '../services/chats-service';
 import Message from '../components/Message/index.jsx';
-import { loadProfile } from '../actions/profileActions';
 import { delMessage } from '../actions/messageActions';
 import CircularProgress from 'material-ui/CircularProgress';
 import '../styles/style.css';
@@ -31,7 +30,6 @@ class MessageField extends React.Component {
     UNSAFE_componentWillMount() {
         this.props.fetchData('http://localhost:5001/api/chats')
     }
-
     handleSendMessage = (message, sender) => {
         if (this.state.input.length > 0 || sender === 'bot') {
             this.props.sendMessage(message, sender)
@@ -40,24 +38,20 @@ class MessageField extends React.Component {
             this.setState({ input: '' })
         }
     };
-
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value });
     };
-
     handleKeyUp = (event) => {
         if (event.keyCode === 13) { // Enter
             this.handleSendMessage(this.state.input, 'me')
         }
     };
-  
     render() {
         if (this.props.isLoading) {
             return <CircularProgress/>
         } 
 
         const { chatId } = this.props;
-
         const messageElements = this.props.chats[chatId].messageList.map(messageId => (
 			<div 
 				className="messageBlock"

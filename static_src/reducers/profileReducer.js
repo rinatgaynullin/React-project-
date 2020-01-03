@@ -3,7 +3,7 @@ import {
     START_PROFILE_LOADING, 
     SUCCESS_PROFILE_LOADING,
     ERROR_PROFILE_LOADING,
-} from '../actions/profileActions'
+} from '../constants/profile-constants'
 
 const initialStore = {
     profile: {},

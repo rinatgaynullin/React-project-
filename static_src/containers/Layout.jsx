@@ -28,8 +28,7 @@ class Layout extends React.Component {
         chatId: 1,
     }
     sendMessage = (message, sender) => {
-        const { chatId, messages } = this.props;
-        const messageId = Object.keys(messages).length + 1; 
+        const { chatId, messageId } = this.props;
         this.props.sendMessage(messageId, message, sender, chatId)
     };
 
@@ -53,6 +52,7 @@ class Layout extends React.Component {
 }
 const mapStateToProps = ({messageReducer}) => ({
     messages: messageReducer.messages,
+    messageId: messageReducer.messageId,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ sendMessage }, dispatch);

@@ -1,41 +1,46 @@
 
 import update from 'react-addons-update';
-import { SEND_MESSAGE } from '../actions/messageActions.js';
-import { ADD_CHAT, DEL_CHAT, BOT_ANSWER, SUCCESS_CHATS_LOADING } from "../actions/chatActions.js";
-import { DEL_MESSAGE } from '../actions/messageActions.js';
-
+import { SEND_MESSAGE, DEL_MESSAGE } from '../constants/message-constants';
+import { 
+    ADD_CHAT, 
+    DEL_CHAT, 
+    SUCCESS_CHATS_LOADING 
+} from "../constants/chat-constants";
 
 const initialStore = {
     chats: {},
     isLoading: true,
+    chatId: 0,
 };
-
 
 export default function chatReducer(store = initialStore, action) {
     switch (action.type) {
         case SEND_MESSAGE: {
             return update(store, {
                 chats: { $merge: { [action.chatId]: {
+                    id: action.chatId,
                     title: store.chats[action.chatId].title,
                     messageList: [...store.chats[action.chatId].messageList, action.messageId]
                 } } },
             });
         }
         case SUCCESS_CHATS_LOADING: {
-            console.log(store)
             return update(store, {
                 chats: { $set: action.payload.entities.chats },
                 isLoading: { $set: false },
-                
+                chatId: { $set: Object.keys(action.payload.entities.chats).length }
             });
         } 
         case ADD_CHAT: {
-            const chatId = Object.keys(store.chats).length + 1;
+            const chatId = store.chatId + 1;
             return update(store, {
                 chats: { $merge: {
                     [chatId]: {
-                        title: action.title, messageList: []
+                        id: chatId,
+                        title: action.title, 
+                        messageList: []
                 } } },
+                chatId: { $set: store.chatId + 1 }
             });
         }
         case DEL_CHAT: {
@@ -43,7 +48,9 @@ export default function chatReducer(store = initialStore, action) {
                 const chatId = action.chatId
                 let chats =  Object.assign({}, store.chats )
                 delete chats[chatId]
-                return update (store, { $set: {chats} })
+                return update (store, { 
+                    $merge: { chats }
+                })
             }
         }
         case DEL_MESSAGE: {
@@ -52,10 +59,14 @@ export default function chatReducer(store = initialStore, action) {
             const chats = Object.assign({}, store.chats)
             let messageList = chats[chatId].messageList
             messageList.splice(messageList.indexOf(messageId), 1 )
-
-            return update (store, { $set: {chats}} )
-                
-        } 
+            return update (store, { 
+                chats : { 
+                    [chatId]: {
+                        messageList:{ $merge: messageList }
+                    }
+                }, 
+            })
+        }
         default:
             return store;
     }

@@ -1,11 +1,11 @@
-import React from 'react'
-import Header from './Header.jsx'
+import React from 'react';
+import Header from './Header.jsx';
 import PropTypes from 'prop-types'
 import { bindActionCreators } from "redux";
 import connect from "react-redux/es/connect/connect";
 import CircularProgress from 'material-ui/CircularProgress';
-import '../styles/profile.css'
-import { profileFetchData } from '../actions/profileActions'
+import profileFetchData  from '../services/profile-service';
+import '../styles/profile.css';
 
 class Profile extends React.Component {
     constructor (props) {
@@ -15,7 +15,6 @@ class Profile extends React.Component {
             nameForButton: 'Чаты'
         }
     }
-
     static propTypes = {
         profile: PropTypes.object.isRequired,
         isProfileLoading: PropTypes.bool.isRequired,
@@ -23,7 +22,6 @@ class Profile extends React.Component {
     UNSAFE_componentWillMount () {
         this.props.fetchData('/api/profile')
     }
-    
     render () {
         if (this.props.isProfileLoading) {
             return <CircularProgress/>

@@ -1,4 +1,4 @@
-import { SEND_MESSAGE } from "../actions/messageActions.js";
+import { SEND_MESSAGE } from "../constants/message-constants";
 import { alertNewBotMessage } from '../actions/chatActions.js'
 export default store => next => (action) => {
 	switch (action.type) {

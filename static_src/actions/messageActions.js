@@ -1,5 +1,4 @@
-export const SEND_MESSAGE = '@@message/SEND_MESSAGE';
-export const DEL_MESSAGE = '@@message/DEL_MESSAGE';
+import { SEND_MESSAGE, DEL_MESSAGE } from '../constants/message-constants'
 
 export const sendMessage = ( messageId, text, sender, chatId) => ({
     type: SEND_MESSAGE,

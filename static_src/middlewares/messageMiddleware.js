@@ -1,5 +1,5 @@
-
-import { SEND_MESSAGE, sendMessage } from "../actions/messageActions.js";
+import { SEND_MESSAGE } from '../constants/message-constants'
+import { sendMessage } from "../actions/messageActions.js";
 
 export default store => next => (action) => {
     switch (action.type) {

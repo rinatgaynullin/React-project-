@@ -1,5 +1,5 @@
 import update from 'react-addons-update';
-import { BOT_ANSWER } from '../actions/chatActions'
+import { BOT_ANSWER } from '../constants/chat-constants'
 
 const initialStore = {
     bgStyle: 'none',
